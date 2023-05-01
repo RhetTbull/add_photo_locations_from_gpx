@@ -9,7 +9,7 @@ from typing import Optional
 
 import click
 import gpxpy
-from gpxpy.gpx import GPXWaypoint
+from gpxpy.gpx import GPXTrackPoint
 from osxphotos import PhotoInfo, PhotosDB
 from osxphotos.photosalbum import PhotosAlbum
 from osxphotos.utils import pluralize
@@ -18,27 +18,30 @@ from photoscript import PhotosLibrary
 DEFAULT_TIME_DELTA = 60
 LOCATION_HISTORY = None
 
-__version__ = "0.01"
+__version__ = "0.02"
 
 
 class GPXData:
-    """Load GPX waypoints from a file and find nearest location to a given timestamp"""
+    """Load GPX track points from a file and find nearest location to a given timestamp"""
 
     def __init__(self, file: str):
         self.file = file
         self.gpx = self._load_gpx(file)
 
     @cached_property
-    def waypoints(self) -> list[GPXWaypoint]:
-        """Return list of waypoints from GPX file"""
+    def points(self) -> list[GPXTrackPoint]:
+        """Return list of track points from GPX file (for example, one created with Geotag Photos Pro)"""
         # ignore waypoints without a time
-        waypoints = [w for w in self.gpx.waypoints if w.time is not None]
-        return sorted(waypoints, key=lambda x: x.time)
+        points = []
+        for track in self.gpx.tracks:
+            for segment in track.segments:
+                points.extend([p for p in segment.points if p.time is not None])
+        return sorted(points, key=lambda x: x.time)
 
     @cached_property
     def timestamps(self) -> list[datetime]:
         """Return list of timestamps from GPX file"""
-        return [w.time for w in self.waypoints]
+        return [w.time for w in self.points]
 
     def _load_gpx(self, file: str):
         """Load GPX data from a file"""
@@ -50,8 +53,8 @@ class GPXData:
         """Return tuple of (nearest location record, delta in sec) to given timestamp"""
         nearest = self._nearest_location_from_timestamp(timestamp)
         # find nearest waypoint with timestamp that matches
-        waypoint = next((w for w in self.waypoints if w.time == nearest), None)
-        return waypoint, abs((waypoint.time - timestamp).total_seconds())
+        point = next((w for w in self.points if w.time == nearest), None)
+        return point, abs((point.time - timestamp).total_seconds())
 
     def _nearest_location_from_timestamp(self, timestamp: datetime) -> datetime:
         """Given a timestamp as datetime, find nearest (in time) location record"""
@@ -62,7 +65,7 @@ class GPXData:
         )
 
     def __len__(self):
-        return len(self.waypoints)
+        return len(self.points)
 
 
 def add_location_to_photo(
@@ -134,15 +137,15 @@ def main(gpx_filename, delta, dry_run, add_to_album, selected):
     click.echo(f"Version: {__version__}")
     click.echo(f"Loading GPX data from {gpx_filename}")
     gpx_data = GPXData(gpx_filename)
-    if len(gpx_data.waypoints) == 0:
-        click.echo("No waypoints found in GPX file.", err=True)
+    if len(gpx_data.points) == 0:
+        click.echo("No tracks found in GPX file.", err=True)
         sys.exit(1)
     click.echo(
-        f"Loaded {len(gpx_data.waypoints)} {pluralize(len(gpx_data.waypoints), 'waypoint', 'waypoints')} from GPX file"
+        f"Loaded {len(gpx_data.points)} {pluralize(len(gpx_data.points), 'track point', 'track points')} from GPX file"
     )
 
-    earliest = gpx_data.waypoints[0]
-    latest = gpx_data.waypoints[-1]
+    earliest = gpx_data.points[0]
+    latest = gpx_data.points[-1]
     click.echo(f"Earliest: {earliest.time}, {earliest.latitude}, {earliest.longitude}")
     click.echo(f"Latest: {latest.time}, {latest.latitude}, {latest.longitude}")
 

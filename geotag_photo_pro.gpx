@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="Geotag Photos http://www.geotagphotos.net/" version="1.0" xmlns="http://www.topografix.com/GPX/1/0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+<trk>
+<name><![CDATA[30.04.23]]></name>
+<trkseg><!-- TZ: 7200 -->
+<trkpt lat="34.191380" lon="-118.348089"><ele>50.830864</ele><time>2023-04-30T11:37:12Z</time></trkpt>
+<trkpt lat="34.191380" lon="-118.348089"><ele>50.830864</ele><time>2023-04-30T11:37:14Z</time></trkpt> </trkseg>
+<trkseg><!-- TZ: 7200 -->
+<trkpt lat="34.184933" lon="-118.339292"><ele>100.947723</ele><time>2023-04-30T15:17:34Z</time></trkpt>
+<trkpt lat="34.184933" lon="-118.339292"><ele>100.947723</ele><time>2023-04-30T15:22:31Z</time></trkpt> </trkseg>
+</trk>
+</gpx>
