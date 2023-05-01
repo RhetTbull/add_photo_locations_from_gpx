@@ -63,6 +63,10 @@ MIT License. See [LICENSE](LICENSE) file.
 - [osxphotos](https://github.com/RhetTbull/osxphotos)
 - [gpxpy](https://github.com/tkrajina/gpxpy)
 
+## See Also
+
+- [add_photo_locations_from_google_history](https://github.com/RhetTbull/add_photo_locations_from_google_history)
+
 ## Caveat
 
 This script can modify photos in your Photos library. Use with caution. No warranty is implied or provided.
