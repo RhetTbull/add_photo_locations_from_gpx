@@ -4,9 +4,13 @@ Python script to add missing location data to photos in your Apple Photos librar
 
 ## Installation
 
+The easiest way to run this is to save the script to your computer then install osxphotos using [these instructions](https://github.com/RhetTbull/osxphotos#installation) and run the script using `osxphotos run add_photo_locations_from_gpx.py`.
+
+If you're comfortable with python, you can also run this script stand-alone:
+
 Clone the repo:
 
-- `git clone https://github.com/RhetTbull/add_photo_locations_from_gpx.git`
+- `git clone git@github.com:RhetTbull/add_photo_locations_from_gpx.git`
 - `cd add_photo_locations_from_gpx`
 
 I recommend you create and activate a python [virtual environment](https://docs.python.org/3/library/venv.html) before running pip:
@@ -20,8 +24,6 @@ Then install requirements:
 
 Requires python 3.9+
 
-Alternatively, you can just install osxphotos using [these instructions](https://github.com/RhetTbull/osxphotos#installation) then run the script using `osxphotos run add_photo_locations_from_gpx.py`.
-
 ## Running
 
 ```
@@ -30,8 +32,9 @@ python3 add_photo_locations_from_gpx.py --help
 or, if running with osxphotos:
 
 osxphotos run add_photo_locations_from_gpx.py --help
+Usage: add_photo_locations_from_gpx.py [OPTIONS] GPX_FILENAME
 
-Usage: add_photo_locations_from_gpx.py [OPTIONS] FILENAME
+  Add missing location data to photos in Apple Photos from GPX file.
 
 Options:
   --delta INTEGER       Time delta in seconds, default = 60.
@@ -39,6 +42,9 @@ Options:
                         photos.
   --add-to-album ALBUM  Add updated photos to album named ALBUM, creating the
                         album if necessary.
+  --selected            Only update photos currently selected in Photos.
+                        Default is to update all photos with missing location
+                        data in the library.
   --help                Show this message and exit.
 ```
 
