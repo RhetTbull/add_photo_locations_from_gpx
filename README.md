@@ -52,6 +52,17 @@ I strongly recommend you run with `--dry-run` first and manually check the locat
 
 `--delta` specifies how close in time (in seconds) the GPX timestamp needs to be (in seconds) in order to match the location to the photo's timestamp.
 
+Photos which already have a location in Photos will not be updated even if the photo's time matches a time in the GPX file.
+
+## License
+
+MIT License. See [LICENSE](LICENSE) file.
+
+## Dependencies
+
+- [osxphotos](https://github.com/RhetTbull/osxphotos)
+- [gpxpy](https://github.com/tkrajina/gpxpy)
+
 ## Caveat
 
-This script can modify photos in your Photos library. Use with caution.  No warranty is implied or provided.
+This script can modify photos in your Photos library. Use with caution. No warranty is implied or provided.
