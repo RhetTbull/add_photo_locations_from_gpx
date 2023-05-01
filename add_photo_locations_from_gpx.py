@@ -18,7 +18,7 @@ from photoscript import PhotosLibrary
 DEFAULT_TIME_DELTA = 60
 LOCATION_HISTORY = None
 
-__version__ = "0.02"
+__version__ = "0.2.0"
 
 
 class GPXData:
@@ -31,7 +31,7 @@ class GPXData:
     @cached_property
     def points(self) -> list[GPXTrackPoint]:
         """Return list of track points from GPX file (for example, one created with Geotag Photos Pro)"""
-        # ignore waypoints without a time
+        # ignore track points without a time
         points = []
         for track in self.gpx.tracks:
             for segment in track.segments:
@@ -41,7 +41,7 @@ class GPXData:
     @cached_property
     def timestamps(self) -> list[datetime]:
         """Return list of timestamps from GPX file"""
-        return [w.time for w in self.points]
+        return [p.time for p in self.points]
 
     def _load_gpx(self, file: str):
         """Load GPX data from a file"""
@@ -53,7 +53,7 @@ class GPXData:
         """Return tuple of (nearest location record, delta in sec) to given timestamp"""
         nearest = self._nearest_location_from_timestamp(timestamp)
         # find nearest waypoint with timestamp that matches
-        point = next((w for w in self.points if w.time == nearest), None)
+        point = next((p for p in self.points if p.time == nearest), None)
         return point, abs((point.time - timestamp).total_seconds())
 
     def _nearest_location_from_timestamp(self, timestamp: datetime) -> datetime:
