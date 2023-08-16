@@ -31,7 +31,9 @@ python3 add_photo_locations_from_gpx.py --help
 
 or, if running with osxphotos:
 
+osxphotos install gpxpy
 osxphotos run add_photo_locations_from_gpx.py --help
+
 Usage: add_photo_locations_from_gpx.py [OPTIONS] GPX_FILENAME
 
   Add missing location data to photos in Apple Photos from GPX file.
