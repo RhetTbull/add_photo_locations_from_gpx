@@ -186,7 +186,13 @@ def add_location_to_photo(
     help="Only update photos currently selected in Photos. "
     "Default is to update all photos with missing location data in the library.",
 )
-def main(gpx_filename, delta, offset, dry_run, add_to_album, selected):
+@click.option(
+    "--overwrite",
+    is_flag=True,
+    help="Overwrite existing location data. "
+    "Default is to skip photos with existing location data.",
+)
+def main(gpx_filename, delta, offset, dry_run, add_to_album, selected, overwrite):
     """Add missing location data to photos in Apple Photos from GPX file."""
     print(f"Version: {__version__}")
     print(f"Offset: {offset}")
@@ -217,23 +223,36 @@ def main(gpx_filename, delta, offset, dry_run, add_to_album, selected):
         if not selected_photos:
             print("No photos selected in Photos.", err=True)
             sys.exit(1)
-        photos = [
-            photo
-            for photo in photosdb.photos(uuid=[p.uuid for p in selected_photos])
-            if photo.location == (None, None) and not photo.shared
-        ]
+        if not overwrite:
+            photos = [
+                photo
+                for photo in photosdb.photos(uuid=[p.uuid for p in selected_photos])
+                if photo.location == (None, None) and not photo.shared
+            ]
+        else:
+            photos = [
+                photo
+                for photo in photosdb.photos(uuid=[p.uuid for p in selected_photos])
+                if not photo.shared
+            ]
     else:
-        photos = [
-            photo
-            for photo in photosdb.photos()
-            if photo.location == (None, None) and not photo.shared
-        ]
+        if not overwrite:
+            photos = [
+                photo
+                for photo in photosdb.photos()
+                if photo.location == (None, None) and not photo.shared
+            ]
+        else:
+            photos = [photo for photo in photosdb.photos() if not photo.shared]
 
     album = PhotosAlbum(add_to_album, verbose=print) if add_to_album else None
-    print(
-        f"Checking {len(photos)} {pluralize(len(photos), 'photo', 'photos')} "
-        f"that lack{'s' if len(photos)==1 else ''} location information"
-    )
+    if not overwrite:
+        print(
+            f"Checking {len(photos)} {pluralize(len(photos), 'photo', 'photos')} "
+            f"that lack{'s' if len(photos)==1 else ''} location information"
+        )
+    else:
+        print(f"Checking {len(photos)} {pluralize(len(photos), 'photo', 'photos')} ")
     results = sum(
         add_location_to_photo(photo, gpx_data, delta, offset, dry_run, album=album)
         for photo in photos
