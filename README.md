@@ -20,7 +20,7 @@ I recommend you create and activate a python [virtual environment](https://docs.
 
 Then install requirements:
 
-- `python3 -m pip requirements.txt`
+- `python3 -m pip -r requirements.txt`
 
 Requires python 3.9+
 
