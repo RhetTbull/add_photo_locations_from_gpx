@@ -1,4 +1,7 @@
 # Add location to Apple Photos from GPX File
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Python script to add missing location data to photos in your Apple Photos library based on a data from a GPX file. This script can be run stand-alone to add location data to the photos in your library or via [osxphotos](https://github.com/RhetTbull/osxphotos) using the `osxphotos run` command.
 
@@ -72,3 +75,25 @@ MIT License. See [LICENSE](LICENSE) file.
 ## Caveat
 
 This script can modify photos in your Photos library. Use with caution. No warranty is implied or provided.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.kevinyank.com/"><img src="https://avatars.githubusercontent.com/u/89772?v=4?s=100" width="100px;" alt="Kevin Yank"/><br /><sub><b>Kevin Yank</b></sub></a><br /><a href="https://github.com/RhetTbull/add_photo_locations_from_gpx/commits?author=sentience" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
