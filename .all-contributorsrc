@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "sentience",
+      "name": "Kevin Yank",
+      "avatar_url": "https://avatars.githubusercontent.com/u/89772?v=4",
+      "profile": "http://www.kevinyank.com/",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "add_photo_locations_from_gpx",
+  "projectOwner": "RhetTbull"
+}
