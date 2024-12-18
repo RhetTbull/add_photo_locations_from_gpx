@@ -7,7 +7,18 @@ Python script to add missing location data to photos in your Apple Photos librar
 
 ## Installation
 
-The easiest way to run this is to save the script to your computer then install osxphotos using [these instructions](https://github.com/RhetTbull/osxphotos#installation) and run the script using `osxphotos run add_photo_locations_from_gpx.py`.
+The easiest way to run this is to install [osxphotos](https://github.com/RhetTbull/osxphotos) using [these instructions](https://github.com/RhetTbull/osxphotos#installation)
+and run the script using:
+
+      osxphotos run https://raw.githubusercontent.com/RhetTbull/add_photo_locations_from_gpx/refs/heads/main/add_photo_locations_from_gpx.py FILENAME.gpx
+
+To see the help for the script, run:
+
+      osxphotos run https://raw.githubusercontent.com/RhetTbull/add_photo_locations_from_gpx/refs/heads/main/add_photo_locations_from_gpx.py --help
+
+You can also save the script locally and run it:
+
+      osxphotos run add_photo_locations_from_gpx.py FILENAME.gpx
 
 If you're comfortable with python, you can also run this script stand-alone:
 
@@ -53,7 +64,7 @@ Options:
   --help                Show this message and exit.
 ```
 
-I strongly recommend you run with `--dry-run` first and manually check the locations for some of the photos.  I also recommend using the `--add-to-album` to add all updated photos to an album so you can check the results.  
+I strongly recommend you run with `--dry-run` first and manually check the locations for some of the photos.  I also recommend using the `--add-to-album` to add all updated photos to an album so you can check the results.
 
 `--delta` specifies how close in time (in seconds) the GPX timestamp needs to be (in seconds) in order to match the location to the photo's timestamp.
 
