@@ -102,6 +102,8 @@ def add_location_to_photo(
     """Add location information to photo record, returns 1 if location added, else 0"""
     date = photo.date + offset if offset is not None else photo.date
     nearest_location, nearest_delta = gpx_data.nearest_location(date)
+    if not nearest_location:
+        return 0
     nearest_delta = int(nearest_delta)
 
     if nearest_delta >= delta:
